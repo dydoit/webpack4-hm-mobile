@@ -1,0 +1,14 @@
+{
+  "extends":"standard",
+  "parser":"babel-eslint",
+  "plugins":[
+    "html"
+  ],
+  "rules":{
+    "no-new":"off"
+  },
+  "globals":{
+    "localStorage": true,
+    "fetch": true
+  }
+}
