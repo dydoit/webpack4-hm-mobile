@@ -9,6 +9,7 @@
     <BannerOther :list="bannerOthers"></BannerOther>
     <Activity :actList="actList"></Activity>
     <Product></Product>
+    <Footer></Footer>
   </div>
 </template>
 <script>
@@ -22,7 +23,6 @@ import FinancialActivity from './components/financialActivity.vue'
 import BannerOther from './components/bannerOther.vue'
 import Activity from './components/activity.vue'
 import Product from './components/product.vue'
-
 import * as api from '@/api'
 import { mapState, mapActions } from 'vuex'
 export default {
