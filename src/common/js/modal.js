@@ -3,7 +3,7 @@ class modal {
     this.confimButton = document.getElementById(confirmId)
     this.cancelButton = document.getElementById(cancelId)
   }
-  confirm (str) {
+  confirm () {
     return new Promise((resolve, reject) => {
       this.confimButton.onClick = resolve
       this.cancelButton.onClick = reject

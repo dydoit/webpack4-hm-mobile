@@ -10,7 +10,6 @@
   </div>
 </template>
 <script>
-// import Bscroll from 'better-scroll'
 export default {
   data () {
     return {
@@ -67,9 +66,6 @@ export default {
   },
   mounted () {
     this.setWidth()
-    // this.$nextTick().then(() => {
-    //   this.scroll = new Bscroll(this.$refs.nav)
-    // })
   }
 }
 </script>
@@ -78,7 +74,7 @@ export default {
   #nav
     padding 0 11px
     background #444
-    overflow hidden
+    overflow auto
     height:43px
     line-height 43px
   ul

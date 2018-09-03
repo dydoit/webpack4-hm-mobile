@@ -4,6 +4,16 @@ Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
   linkExactActiveClass: 'active',
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      if (from.meta.keepAlive) {
+        from.meta.savedPosition = document.body.scrollTop
+      }
+      return { x: 0, y: to.meta.savedPosition || 0 }
+    }
+  },
   routes: [
     {
       path: '/',
@@ -63,6 +73,16 @@ export default new VueRouter({
       path: '/news',
       name: 'News',
       component: () => import('../views/news/news.vue')
+    },
+    {
+      path: '/shopCar',
+      name: 'ShopCar',
+      component: () => import('../views/shopCar/index.vue')
+    },
+    {
+      path: '/user',
+      name: 'User',
+      component: () => import('../views/user/index.vue')
     },
     {
       path: '*',
