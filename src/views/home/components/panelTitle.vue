@@ -36,6 +36,7 @@ export default {
         color #333
         span
           position absolute
+          display block
           width 2em
           height 2px
           background-color #ff8c00

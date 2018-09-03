@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import Bscroll from 'better-scroll'
+// import Bscroll from 'better-scroll'
 export default {
   data () {
     return {
@@ -67,7 +67,9 @@ export default {
   },
   mounted () {
     this.setWidth()
-    this.scroll = new Bscroll(this.$refs.nav)
+    // this.$nextTick().then(() => {
+    //   this.scroll = new Bscroll(this.$refs.nav)
+    // })
   }
 }
 </script>
