@@ -18,6 +18,7 @@ const config = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'common': resolve('src/common'),
       'styles':resolve('src/styles'),
       'views':resolve('src/views')
     }

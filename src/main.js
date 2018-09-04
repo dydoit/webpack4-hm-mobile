@@ -10,7 +10,6 @@ import 'styles/global.styl'
 import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwasomeSwiper)
 FastClick.attach(document.body)
-
 new Vue({
   el: '#root',
   router,
