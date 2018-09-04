@@ -5,8 +5,8 @@ class modal {
   }
   confirm () {
     return new Promise((resolve, reject) => {
-      this.confimButton.onClick = resolve
-      this.cancelButton.onClick = reject
+      this.confimButton.onclick = resolve
+      this.cancelButton.onclick = reject
     })
   }
 }

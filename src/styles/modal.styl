@@ -1,0 +1,49 @@
+.dy-mask
+    position fixed
+    z-index 999
+    top 0
+    bottom 0
+    right 0
+    left 0
+    background-color #ccc
+    opacity .5
+  .dy-dialog
+    position fixed
+    z-index 1000
+    top 0
+    bottom 0
+    right 0
+    left 0
+    text-align center
+    &:after 
+      content ''
+      display inline-block
+      height 100%
+      width 0
+      vertical-align middle
+    .dy-dialog-content
+      display inline-block
+      box-sizing border-box
+      width 250px
+      min-height 100px
+      padding 10px
+      border-radius 6px
+      background-color #fff
+      h4
+        line-height 2
+        text-align left
+        font-size 15px
+      p
+        margin 8px 0
+        font-size 12px
+      .btn-group
+        margin-top 20px
+        button 
+          width 56px
+          height 24px
+          font-size 12px
+          border-radius 4px
+          &.btn-confirm
+            margin-left 16px
+            background-color #ff8c00
+            color #fff

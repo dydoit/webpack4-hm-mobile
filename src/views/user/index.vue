@@ -1,33 +1,25 @@
 <template>
   <div class="user-center">
     个人中心
-    <a href="javascript:;" id="confirm">确认</a>
-    <a href="javascript:;" id="cancel">取消</a>
     <a href="javascript:;" id="start" @click="start">开始</a>
+    <!-- <div class="dy-mask">
+    </div>
+    <div class="dy-dialog">
+      <div class="dy-dialog-content">
+        <h4>提示</h4>
+        <p>
+          <i class="iconfont icon-warning"></i>
+          <span>删除后无法恢复，确认删除吗</span>
+        </p>
+        <div class="btn-group">
+          <button class="btn-cancel">取消</button>
+          <button class="btn-confirm">确认</button>
+        </div>
+      </div>
+    </div> -->
   </div>
 </template>
 <script>
-let Reconfirm = () => {
-  return new Promise(function (resolve, reject) {
-    document.getElementById('confirm').onclick = resolve
-    document.getElementById('cancel').onclick = reject
-  })
-}
-
-// import {Modal} from 'common/js/modal.js'
-// let btn1 = document.getElementById('confirm')
-// let btn2 = document.getElementById('cancel')
-// let promise = function () {
-//   return new Promise((resolve, reject) => {
-//     btn1.conClick = resolve()
-//     btn2.onClick = reject(new Error('no lyric'))
-//   })
-// }
-// promise().then(() => {
-//   console.log('你按了确认')
-// }).catch(() => {
-//   console.log('发生了啥2')
-// })
 export default {
   data () {
     return {
@@ -36,16 +28,18 @@ export default {
   },
   methods: {
     start () {
-      console.log('开始')
-      Reconfirm().then(() => {
-        console.log('你按了确认')
-      }, () => {
-        console.log('你取消了')
+      this.$confirm('你确认点了', '温馨提示', {
+        cancelText: 'cancel',
+        confirmText: 'confirm'
+      }).then(() => {
+        console.log('你点击了确认')
       })
     }
-  },
-  mounted () {
-    console.log('cao')
   }
 }
 </script>
+<style lang="stylus" scoped>
+  
+            
+</style>
+
