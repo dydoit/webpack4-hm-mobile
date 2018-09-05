@@ -1,4 +1,4 @@
-import {params, postData} from '@/utils/config.js'
+import {params, postData} from './config.js'
 // 获取当前定位
 export const getLocation = (payload = {}) => {
   return postData('/api/sys/city/location', {
