@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import BScroll from 'better-scroll';
+import BScroll from 'better-scroll'
 export default {
   props: {
     probeType: {
@@ -27,8 +27,8 @@ export default {
   },
   methods: {
     _initScroll () {
-      if(!this.$refs.wrapper){
-        return
+      if (!this.$refs.wrapper) {
+
       } else {
         this.scroll = new BScroll(this.$refs.wrapper, {
           probeType: this.probeType,

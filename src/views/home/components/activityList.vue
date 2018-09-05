@@ -4,7 +4,7 @@
       <li v-for="item of list" :key="item.actId">
         <div class="img-wrapper">
           <span>优惠券</span>
-          <img :src="item.coverImg" alt="">
+          <img v-lazy="item.coverImg" alt="">
         </div>
         <p>{{item.title}}</p>
         <p>
@@ -56,7 +56,7 @@ export default {
             text-align center
             font-size 10px
             color #fff
-            background url(../../../images/bgcover.png)
+            background url(../../../common/images/bgcover.png)
             background-size 100% 100%
           img
             width 100%

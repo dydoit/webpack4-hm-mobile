@@ -5,14 +5,20 @@ import 'babel-polyfill'
 import 'whatwg-fetch'
 import FastClick from 'fastclick'
 import VueAwasomeSwiper from 'vue-awesome-swiper'
+import VueLazyload from 'vue-lazyload'
 import store from './store'
-import 'styles/global.styl'
+import 'common/styles/global.styl'
 import 'swiper/dist/css/swiper.css'
-import $$ from 'common/js/index'
-console.log($$)
-Vue.use($$)
+Vue.use(VueLazyload)
 Vue.use(VueAwasomeSwiper)
 FastClick.attach(document.body)
+Vue.use(VueLazyload, { // 此项目没有懒加载的素材图片
+  preLoad: 1.3,
+  error: './common/images/lazy.gif',
+  loading: './common/images/lazy.gif',
+  attempt: 1
+})
+
 new Vue({
   el: '#root',
   router,

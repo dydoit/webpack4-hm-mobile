@@ -3,7 +3,7 @@
     <ul>
       <li v-for="item of list" :key="item.productId">
         <div class="img-wrapper">
-          <img :src="item.coverImg" alt="">
+          <img v-lazy="item.coverImg" alt="">
         </div>
         <p>{{item.planName}}</p>
         <p>
@@ -38,7 +38,6 @@ export default {
         width 49%
         margin-bottom 12px
         padding-bottom 10px
-        background #fff
         .img-wrapper
           height 0
           overflow hidden

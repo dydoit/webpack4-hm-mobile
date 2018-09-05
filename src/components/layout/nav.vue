@@ -70,7 +70,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-@import '~styles/variables.styl'
+@import '~common/styles/variables.styl'
   #nav
     padding 0 11px
     background #444

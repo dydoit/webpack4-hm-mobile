@@ -2,7 +2,7 @@
   <div class="login">
     <Title :title="title"></Title>
     <div class="logo-wrapper">
-      <img src= "../../images/haima-logo.png" alt="">
+      <img src= "../../common/images/haima-logo.png" alt="">
     </div>
     <div class="form-wrapper">
       

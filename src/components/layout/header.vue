@@ -5,7 +5,7 @@
         <span>{{city.alias}}</span>
       </router-link>
       <div>
-        <img src="../../images/logo.png" alt="">
+        <img src="../../common/images/logo.png" alt="">
       </div>
       <div>
         <i class="icon iconfont icon-sousuotubiao"></i>

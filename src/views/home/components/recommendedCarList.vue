@@ -3,7 +3,7 @@
     <ul v-if="showList">
       <li v-for="item of carList" :key="item.carSeriesId">
         <div>
-          <img :src="item.mainPic" alt="">
+          <img v-lazy="item.mainPic" alt="">
         </div>
         <i :class="'iconfont icon-'+item.carSeriesId"></i>
       </li>

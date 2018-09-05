@@ -1,4 +1,4 @@
-//api通用参数
+// api通用参数
 export const params = () => {
   let date = new Date()
   let year = String(date.getFullYear())

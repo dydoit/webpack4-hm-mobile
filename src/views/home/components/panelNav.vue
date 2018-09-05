@@ -24,7 +24,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-@import '~styles/variables.styl'
+@import '~common/styles/variables.styl'
   .panel-nav
     display flex
     justify-content space-between

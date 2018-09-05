@@ -61,7 +61,7 @@ const config = {
         include: [resolve('src'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
-        test:/\.(jpg|png|svg|jpeg)$/,
+        test:/\.(jpg|png|svg|jpeg|gif)$/,
         use:{
           loader:'url-loader',
           options:{
