@@ -19,7 +19,7 @@ export default {
           id: 'p001',
           name: '首页',
           icon: 'icon iconfont icon-shouye',
-          path: '/index'
+          path: '/home'
 
         },
         {
@@ -59,6 +59,7 @@ export default {
 <style lang="stylus" scoped>
   #footer
     width 100%
+    height 50px
   .foot-nav
     display flex
     justify-content space-between

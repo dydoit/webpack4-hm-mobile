@@ -1,7 +1,7 @@
 <template>
   <div id="alphabet">
-    <ul>
-      <li v-for="item of alphabets" :key="item" :ref="item"
+    <ul id="text">
+      <li v-for="(item,index) of alphabets" :key="item" :ref="item" :class="{active:currentIndex == index}"
       @click="handleLetterClick"
       @touchstart.prevent="handleTouchStart"
       @touchmove="handleTouchMove"
@@ -10,35 +10,44 @@
   </div>
 </template>
 <script>
+import { debounce } from '@/common/js/utils.js'
+const alphabetHeight = 18
+const alphabetOffsetTop = 80
 export default {
   name: 'Alphabet',
   data () {
     return {
-      touchStatus: false
+      touchStatus: false,
+      currentIndex: 0
     }
   },
   props: {
     alphabets: Array
   },
+  computed: {
+    startY () {
+      return this.$refs['A'][0].offsetTop
+    }
+  },
   methods: {
     handleLetterClick (e) {
-      this.$emit('change', e.target.innerText)
+      let letter = e.target.innerText
+      this.$emit('change', letter)
+      // this.currentIndex = this.alphabets.indexOf(letter)
+      this.currentIndex = this.alphabets.findIndex(item => item === letter)
     },
-    handleTouchStart () {
+    handleTouchStart (e) {
       this.touchStatus = true
     },
     handleTouchMove (e) {
       if (this.touchStatus) {
-        if (this.timer) {
-          clearTimeout(this.timer)
-        }
-        this.timer = setTimeout(() => {
-          const touchY = e.touches[0].clientY - 79
-          const index = Math.floor((touchY - this.startY) / 20)
-          if (index >= 0 && index < this.letters.length) {
-            this.$emit('change', this.letters[index])
+        debounce(() => {
+          const touchY = e.touches[0].clientY - alphabetOffsetTop
+          const index = ((touchY - this.startY) / alphabetHeight) | 0
+          if (index >= 0 && index < this.alphabets.length) {
+            this.$emit('change', this.alphabets[index])
           }
-        }, 16)
+        }, 16)()
       }
     },
     handleTouchEnd () {
@@ -63,6 +72,8 @@ export default {
     color #333
     li
       cursor pointer
+      &.active
+        color #ff8c00
 
 </style>
 

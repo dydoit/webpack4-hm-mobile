@@ -1,5 +1,6 @@
 <template>
   <div id="buy">
+    买车页面
     <Keyboard></Keyboard>
   </div>
 </template>

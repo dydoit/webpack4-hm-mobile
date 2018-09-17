@@ -17,12 +17,23 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/index'
+      redirect: '/home'
     },
     {
-      path: '/index',
+      path: '/home',
       name: 'Home',
-      component: () => import('../views/home/home.vue')
+      component: () => import('../views/home/home.vue'),
+      children: [
+        {
+          path: '',
+          component: () => import('../views/index/index.vue')
+        },
+        {
+          path: 'buy',
+          name: 'Buy',
+          component: () => import('../views/buy/buy.vue')
+        }
+      ]
     },
     {
       path: '/city',
@@ -33,11 +44,6 @@ export default new VueRouter({
       path: '/login',
       name: 'Login',
       component: () => import('../views/login/login.vue')
-    },
-    {
-      path: '/buy',
-      name: 'Buy',
-      component: () => import('../views/buy/buy.vue')
     },
     {
       path: 'customMade',
@@ -83,10 +89,6 @@ export default new VueRouter({
       path: '/user',
       name: 'User',
       component: () => import('../views/user/index.vue')
-    },
-    {
-      path: '*',
-      redirect: '/index'
     }
   ]
 })

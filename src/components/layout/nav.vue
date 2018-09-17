@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" ref="nav">
+  <Scroll id="nav" ref="nav" :data = "navList" :scrollX = "true">
     <ul class="auto" ref="navList">
       <router-link tag = "li" :to="{path:navItem.path}" v-for="navItem of navList" :key="navItem.name" exact>
         <a href="javacript:;">
@@ -7,21 +7,21 @@
         </a>
       </router-link>
     </ul>
-  </div>
+  </Scroll>
 </template>
 <script>
+import Scroll from '@/components/scroll/scroll.vue'
 export default {
   data () {
     return {
-      scroll: '',
       navList: [
         {
           name: '推荐',
-          path: '/index'
+          path: '/home'
         },
         {
           name: '买车',
-          path: '/buy'
+          path: '/home/buy'
         },
         {
           name: '快找找店',
@@ -54,6 +54,9 @@ export default {
       ]
     }
   },
+  components: {
+    Scroll
+  },
   methods: {
     setWidth () {
       let ul = this.$refs.navList
@@ -72,17 +75,14 @@ export default {
 <style lang="stylus" scoped>
 @import '~common/styles/variables.styl'
   #nav
-    padding 0 11px
     background #444
-    overflow auto
+    overflow hidden
     height:43px
     line-height 43px
   ul
     li
       display inline-block
       padding 0 15px
-      &:first-child
-        padding-left 0
       a
         position relative
         display block

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="banner-wrapper">
     <swiper :options="swiperOption" ref="mySwiper" v-if="showSwiper">
       <swiper-slide v-for="item of bannerList" :key="item.id" @click.stop="go()">
         <img class="swiper-img" :src="item.imagePath" />
@@ -32,9 +32,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  .wrapper >>> .swiper-pagination-bullet-active
+  .banner-wrapper >>> .swiper-pagination-bullet-active
     background-color #ff8c00
-  .wrapper
+  .banner-wrapper
     overflow hidden
     width:100%
     height:0

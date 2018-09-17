@@ -31,6 +31,7 @@ export default {
     justify-content space-between
     div
       &:first-child
+        position relative
         font-size 15px
         font-weight 600
         color #333

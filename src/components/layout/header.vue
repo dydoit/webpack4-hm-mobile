@@ -39,6 +39,13 @@ export default {
         line-height 50px
       &:first-child
         left:11px
+        span 
+          display inline-block
+          vertical-align middle
+          max-width 70px
+          overflow hidden
+          white-space: nowrap
+          text-overflow: ellipsis
       &:last-child
         right:11px;
     img

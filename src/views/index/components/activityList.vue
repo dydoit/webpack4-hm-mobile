@@ -45,6 +45,7 @@ export default {
         margin-bottom 12px
         padding-bottom 10px
         .img-wrapper
+          position relative
           height 0
           overflow hidden
           padding-bottom 100%

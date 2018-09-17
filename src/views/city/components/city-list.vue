@@ -1,29 +1,37 @@
 <template>
-  <div id="cityList" ref="cityList">
+  <Scroll id="cityList" ref="cityList" :data = "cityList">
     <div class="wrapper">
       <dl>
         <dt>GPS定位</dt>
         <dd @click="selectCity(locationCity)">{{locationCity.alias}}</dd>
       </dl>
-      <dl v-for="(value,key) of cityObj" :key="key" :ref = "key">
+      <dl v-for="(value,key) of cityObj" :key="key" :ref = "key" class="list-group">
         <dt>{{key}}</dt>
         <dd v-for="item of value" :key="item.id" class="border-bottom"  @click="selectCity(item)">{{item.alias}}</dd>
       </dl>
     </div>
-  </div>
+  </Scroll>
 </template>
 <script>
-import Bscroll from 'better-scroll'
+import Scroll from '@/components/scroll/scroll.vue'
 import {mapState, mapMutations} from 'vuex'
 export default {
   name: 'cityList',
   data () {
     return {
-      scroll: null
     }
   },
+  components: {
+    Scroll
+  },
+  mounted () {
+
+  },
   computed: {
-    ...mapState(['city'])
+    ...mapState(['city']),
+    cityList () {
+      return Object.values(this.cityObj)
+    }
   },
   props: {
     cityObj: Object,
@@ -33,8 +41,8 @@ export default {
   watch: {
     letter () {
       if (this.letter) {
-        const element = this.$refs[this.letter][0]
-        this.scroll.scrollToElement(element)
+        let letter = this.letter
+        this._scrollTo(letter)
       }
     }
   },
@@ -44,11 +52,11 @@ export default {
       this.setCity(item)
       localStorage.setItem('city', JSON.stringify(item))
       this.$router.push('/')
+    },
+    _scrollTo (letter) {
+      const element = this.$refs[this.letter][0]
+      this.$refs.cityList.scrollToElement(element, 0)
     }
-  },
-  mounted () {
-    let cityList = this.$refs.cityList
-    this.scroll = new Bscroll(cityList)
   }
 }
 </script>

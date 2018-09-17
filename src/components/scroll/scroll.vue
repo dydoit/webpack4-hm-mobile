@@ -15,6 +15,10 @@ export default {
       type: Boolean,
       default: true
     },
+    scrollX: {
+      type: Boolean,
+      default: false
+    },
     data: {
       type: Array,
       default: null
@@ -32,6 +36,7 @@ export default {
       } else {
         this.scroll = new BScroll(this.$refs.wrapper, {
           probeType: this.probeType,
+          scrollX: this.scrollX,
           click: this.click
         })
       }
@@ -47,6 +52,9 @@ export default {
     },
     scrollTo () {
       this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
+    },
+    scrollToElement () {
+      this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
     }
   },
   watch: {
