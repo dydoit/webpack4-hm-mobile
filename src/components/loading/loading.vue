@@ -17,7 +17,12 @@ export default {
 </script>
 <style lang="stylus" scoped>
   .loading
+    padding-top 10px
     text-align center
+    font-size 10px
+    img 
+      width 50px
+      margin-bottom 6px
 </style>
 
 
