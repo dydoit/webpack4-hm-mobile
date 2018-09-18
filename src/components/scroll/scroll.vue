@@ -15,6 +15,10 @@ export default {
       type: Boolean,
       default: true
     },
+    listenScroll: {
+      type: Boolean,
+      default: false
+    },
     scrollX: {
       type: Boolean,
       default: false
@@ -39,6 +43,13 @@ export default {
           scrollX: this.scrollX,
           click: this.click
         })
+        if (this.listenScroll) {
+          let _this = this
+          console.log('进来没')
+          this.scroll.on('scroll', (pos) => {
+            _this.$emit('scroll', pos)
+          })
+        }
       }
     },
     enable () {

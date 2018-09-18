@@ -1,8 +1,8 @@
 <template>
   <div id="city">
     <CityHeader :title = 'title'></CityHeader>
-    <CityList :cityObj = 'cityObj' :locationCity = 'locationCity' :letter="letter"></CityList>
-    <Alphabet :alphabets = 'alphabets' @change="handleLetterChange"></Alphabet>
+    <CityList :cityObj = 'cityObj' :locationCity = 'locationCity' :letter="letter" @popIndex = "getIndex"></CityList>
+    <Alphabet :alphabets = 'alphabets' :current-index="currentIndex" @change="handleLetterChange"></Alphabet>
 
   </div>
 </template>
@@ -18,7 +18,8 @@ export default {
       title: '选择城市',
       locationCity: {},
       cityObj: {},
-      letter: ''
+      letter: '',
+      currentIndex: 0
     }
   },
   computed: {
@@ -28,8 +29,12 @@ export default {
 
   },
   methods: {
-    handleLetterChange (letter) {
+    handleLetterChange ({letter, currentIndex}) {
       this.letter = letter
+      this.currentIndex = currentIndex
+    },
+    getIndex (i) {
+      this.currentIndex = i
     }
   },
   components: {

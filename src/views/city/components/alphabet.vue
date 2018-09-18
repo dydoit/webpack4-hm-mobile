@@ -17,12 +17,12 @@ export default {
   name: 'Alphabet',
   data () {
     return {
-      touchStatus: false,
-      currentIndex: 0
+      touchStatus: false
     }
   },
   props: {
-    alphabets: Array
+    alphabets: Array,
+    currentIndex: Number
   },
   computed: {
     startY () {
@@ -32,9 +32,9 @@ export default {
   methods: {
     handleLetterClick (e) {
       let letter = e.target.innerText
-      this.$emit('change', letter)
-      // this.currentIndex = this.alphabets.indexOf(letter)
-      this.currentIndex = this.alphabets.findIndex(item => item === letter)
+      let currentIndex = this.alphabets.findIndex(item => item === letter)
+      let payload = {letter, currentIndex}
+      this.$emit('change', payload)
     },
     handleTouchStart (e) {
       this.touchStatus = true
@@ -45,7 +45,8 @@ export default {
           const touchY = e.touches[0].clientY - alphabetOffsetTop
           const index = ((touchY - this.startY) / alphabetHeight) | 0
           if (index >= 0 && index < this.alphabets.length) {
-            this.$emit('change', this.alphabets[index])
+            let letter = this.alphabets[index]
+            this.$emit('change', {letter, currentIndex: index})
           }
         }, 16)()
       }

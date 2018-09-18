@@ -72,11 +72,12 @@ export default {
       api.getActivityList(page, pageSize, {
         cityId
       }).then(res => {
-        console.log(res)
         if (res.code === 'success') {
           let {data} = res
           this.actList = data.actList
         }
+      }).catch((err) => {
+        console.log(err)
       })
     },
     getProduct () {

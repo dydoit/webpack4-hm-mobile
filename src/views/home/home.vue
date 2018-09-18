@@ -2,7 +2,7 @@
   <div class="home">
     <Header></Header>
     <Nav></Nav>
-    <Scroll class="main">
+    <Scroll class="main" ref="scroll">
        <router-view></router-view>
     </Scroll>
     <Footer></Footer>
@@ -23,6 +23,9 @@ export default {
     Nav,
     Footer,
     Scroll
+  },
+  activated () {
+    this.$refs.scroll.refresh()
   }
 }
 </script>

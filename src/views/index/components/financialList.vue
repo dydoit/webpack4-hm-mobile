@@ -38,6 +38,7 @@ export default {
         width 49%
         margin-bottom 12px
         padding-bottom 10px
+        background-color #fff
         .img-wrapper
           height 0
           overflow hidden
