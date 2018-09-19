@@ -45,7 +45,6 @@ export default {
         })
         if (this.listenScroll) {
           let _this = this
-          console.log('进来没')
           this.scroll.on('scroll', (pos) => {
             _this.$emit('scroll', pos)
           })

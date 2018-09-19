@@ -1,7 +1,7 @@
 <template>
-  <div class="activityList" v-if="showList">
+  <div class="activityList">
     <ul>
-      <li v-for="item of list" :key="item.actId">
+      <li v-for="item of actList" :key="item.actId">
         <div class="img-wrapper">
           <span>优惠券</span>
           <img v-lazy="item.coverImg" alt="">
@@ -23,25 +23,19 @@ export default {
     }
   },
   props: {
-    list: Array
-  },
-  computed: {
-    showList () {
-      return this.list.length
-    }
+    actList: Array
   }
-
 }
 </script>
 <style lang="stylus" scoped>
   .activityList
-    margin 20px 0
+    padding 20px 10px 10px 10px
     ul
       display flex
       justify-content space-between
       flex-wrap wrap
       li
-        width 49%
+        width 48.5%
         margin-bottom 12px
         padding-bottom 10px
         .img-wrapper

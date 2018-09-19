@@ -1,7 +1,7 @@
 <template>
   <div class="financialList">
     <ul>
-      <li v-for="item of list" :key="item.productId">
+      <li v-for="item of financialList" :key="item.productId">
         <div class="img-wrapper">
           <img v-lazy="item.coverImg" alt="">
         </div>
@@ -23,19 +23,19 @@ export default {
     }
   },
   props: {
-    list: Array
+    financialList: Array
   }
 }
 </script>
 <style lang="stylus">
   .financialList
-    margin 20px 0
+    padding 10px
     ul
       display flex
       justify-content space-between
       flex-wrap wrap
       li
-        width 49%
+        width 48.5%
         margin-bottom 12px
         padding-bottom 10px
         background-color #fff

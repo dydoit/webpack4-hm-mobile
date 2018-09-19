@@ -1,5 +1,6 @@
 const state = {
-  city: {} // 城市对象
+  city: {}, // 城市对象
+  cart: {} // 购物车
 
 }
 

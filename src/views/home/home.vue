@@ -2,9 +2,9 @@
   <div class="home">
     <Header></Header>
     <Nav></Nav>
-    <Scroll class="main" ref="scroll">
+    <div class="main">
        <router-view></router-view>
-    </Scroll>
+    </div>
     <Footer></Footer>
   </div>
 </template>
@@ -12,7 +12,6 @@
 import Header from '@/components/layout/header.vue'
 import Footer from '@/components/layout/footer.vue'
 import Nav from '@/components/layout/nav.vue'
-import Scroll from '@/components/scroll/scroll.vue'
 export default {
   data () {
     return {
@@ -21,11 +20,7 @@ export default {
   components: {
     Header,
     Nav,
-    Footer,
-    Scroll
-  },
-  activated () {
-    this.$refs.scroll.refresh()
+    Footer
   }
 }
 </script>

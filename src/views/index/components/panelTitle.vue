@@ -1,6 +1,6 @@
 <template>
   <div class="title">
-    <div class="title-text">
+    <div :class="[isHasClass?'blue':'']">
       {{title}}
       <span></span>
     </div>
@@ -20,7 +20,11 @@ export default {
     }
   },
   props: {
-    title: String
+    title: String,
+    isHasClass: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>
@@ -29,6 +33,7 @@ export default {
   .title
     display flex
     justify-content space-between
+    padding 20px 10px 10px 10px
     div
       &:first-child
         position relative
@@ -46,4 +51,6 @@ export default {
         color #aaa
         i
           font-size 10px
+      &.blue
+        color #fff
 </style>

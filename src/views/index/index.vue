@@ -1,46 +1,78 @@
 <template>
-  <div class="index">
-    <Banner :bannerList = 'bannerList' ></Banner>
-    <PanelNav></PanelNav>
-    <RecommendedModel :recommendedCarList="recommendedCarList"></RecommendedModel>
-    <FinancialActivity :financialList='financialList'></FinancialActivity>
-    <BannerOther :list="bannerOthers"></BannerOther>
-    <Activity :actList="actList"></Activity>
-    <Product></Product>
-  </div>
+  <scroll ref="scroll" class="index">
+    <div>
+      <banner :bannerList = 'bannerList' ></banner>
+      <panel-nav></panel-nav>
+      <div class="bg-white">
+        <panel-title :title="titles[0].name"></panel-title>
+        <recommended-car-list :recommendedCarList="recommendedCarList"></recommended-car-list>
+      </div>
+      
+      <div class="bg-black">
+        <panel-title :title="titles[1].name" :is-has-class="true"></panel-title>
+        <financial-list :financial-list='financialList'></financial-list>
+      </div>
+      <banner-other :list="bannerOthers"></banner-other>
+      <div class="bg-black">
+        <panel-title :title="titles[2].name" :is-has-class="true"></panel-title>
+        <activity-list :actList="actList"></activity-list>
+      </div>
+      <div class="bg-black mt10">
+        <panel-title :title="titles[3].name" :is-has-class="true"></panel-title>
+        <product :product-list = "productList"></product>
+      </div>
+      <div class="bg-black mt10">
+        <panel-title :title="titles[4].name" :is-has-class="true"></panel-title>
+      </div>
+      
+    </div>
+    
+  </scroll>
 </template>
 <script>
+import Scroll from '@/components/scroll/scroll.vue'
 import Banner from './components/banner'
 import PanelNav from './components/panelNav.vue'
-import RecommendedModel from './components/recommendedModel'
-import FinancialActivity from './components/financialActivity.vue'
+import PanelTitle from './components/panelTitle.vue'
+import RecommendedCarList from './components/recommendedCarList'
+import FinancialList from './components/financialList.vue'
 import BannerOther from './components/bannerOther.vue'
-import Activity from './components/activity.vue'
+import ActivityList from './components/activityList.vue'
 import Product from './components/product.vue'
 import * as api from '@/api'
-import { mapState, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'index',
   data () {
     return {
+      titles: [
+        {name: '推荐车型', path: '/carList'},
+        {name: '金融活动', path: '/carList'},
+        {name: '热门活动', path: '/carList'},
+        {name: '纯正配件', path: '/carList'},
+        {name: '优秀经销商', path: '/carList'}
+      ],
       bannerList: [],
       prevBannerList: [],
       recommendedCarList: [],
       financialList: [],
       bannerOthers: [],
-      actList: []
+      actList: [],
+      productList: []
     }
   },
   computed: {
-    ...mapState(['city'])
+    ...mapGetters(['city'])
   },
   components: {
+    Scroll,
     Banner,
     PanelNav,
-    RecommendedModel,
-    FinancialActivity,
+    PanelTitle,
+    RecommendedCarList,
+    FinancialList,
     BannerOther,
-    Activity,
+    ActivityList,
     Product
   },
   methods: {
@@ -73,6 +105,7 @@ export default {
         cityId
       }).then(res => {
         if (res.code === 'success') {
+          this.$refs.scroll.refresh()
           let {data} = res
           this.actList = data.actList
         }
@@ -82,6 +115,20 @@ export default {
     },
     getProduct () {
       api.getProduct({recId: 'product'}).then(res => {
+        if (res.success) {
+          let { data } = res
+          this.productList = data.productList
+          console.log(this.productList)
+        }
+      })
+    },
+    getGoodDealers () {
+      let _this = this
+      api.getGoodDealers({
+        page: 1,
+        pageSize: 2,
+        city: _this.city.id
+      }).then(res => {
         console.log(res)
       })
     }
@@ -100,11 +147,11 @@ export default {
     this.getBanner('INDEX_MIDDLE').then(res => {
       if (res.code === 'success') {
         let {data} = res
-        console.log(data)
         this.bannerOthers = data.bannerList
       }
     })
     this.getProduct()
+    this.getGoodDealers()
   },
   watch: {
     city (newVal) {
@@ -120,7 +167,14 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-
+  .index
+    height 100%
+    overflow hidden
+    background-color #3C3C3C
+  .bg-black
+    background-color #444
+  .bg-white
+    background-color #fff
 </style>
 
 

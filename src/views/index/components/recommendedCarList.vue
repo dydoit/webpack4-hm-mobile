@@ -1,7 +1,7 @@
 <template>
   <div class="recommendCarList">
-    <ul v-if="showList">
-      <li v-for="item of carList" :key="item.carSeriesId">
+    <ul>
+      <li v-for="item of recommendedCarList" :key="item.carSeriesId">
         <div>
           <img v-lazy="item.mainPic" alt="">
         </div>
@@ -15,12 +15,7 @@
 export default {
   name: 'recommendCarList',
   props: {
-    carList: Array
-  },
-  computed: {
-    showList () {
-      return this.carList.length
-    }
+    recommendedCarList: Array
   }
 }
 </script>
@@ -34,7 +29,7 @@ export default {
       flex-wrap wrap
       li
         float left
-        width 49%
+        width 48.5%
         margin-bottom 5px
         text-align center
         div

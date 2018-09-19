@@ -57,3 +57,14 @@ export const getProduct = (payload = {}) => {
     data: payload
   })
 }
+// 获取优秀经销商
+export const getGoodDealers = (payload = {}) => {
+  return postData('/api/user/dealer/excellentList', {
+    ...params(),
+    page: payload.page,
+    pageSize: payload.pageSize,
+    data: {
+      city: payload.city
+    }
+  })
+}

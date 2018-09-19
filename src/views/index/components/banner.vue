@@ -2,7 +2,9 @@
   <div class="banner-wrapper">
     <swiper :options="swiperOption" ref="mySwiper" v-if="showSwiper">
       <swiper-slide v-for="item of bannerList" :key="item.id" @click.stop="go()">
-        <img class="swiper-img" :src="item.imagePath" />
+        <a :href="item.mobileUrl">
+          <img class="swiper-img" :src="item.imagePath" />
+        </a>
       </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
