@@ -12,8 +12,8 @@ export default {
   data () {
 
   },
-  props:{
-    
+  props: {
+
   }
 }
 </script>

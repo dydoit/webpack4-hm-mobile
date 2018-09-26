@@ -1,6 +1,11 @@
 export function debounce (func, delay) {
-  let timer
-  return function (...args) {
+  let timer; let firstTime = true
+  return (...args) => {
+    if (firstTime) {
+      func.apply(this, args)
+      firstTime = false
+      return
+    }
     if (timer) {
       clearTimeout(timer)
     }
