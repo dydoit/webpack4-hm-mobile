@@ -1,16 +1,16 @@
 const strategies = {
   isNonEmpty (val, errorMsg) {
-    if(val === '') {
+    if (val === '') {
       return errorMsg
     }
   },
   minLength (val, length, errorMsg) {
-    if(val.length < length) {
+    if (val.length < length) {
       return errorMsg
     }
   },
   isMobile (val, errorMsg) {
-    if(!(/^1[3|5|8][0-9]{9}$/).test(val)){
+    if (!(/^1[3|5|8][0-9]{9}$/).test(val)) {
       return errorMsg
     }
   }
@@ -20,9 +20,9 @@ export class Validator {
   constructor () {
     this.cache = []
   }
-  add(dom, rules) {
+  add (dom, rules) {
     let self = this
-    for (let i = 0, rule; rule = [rules[i++]];) {
+    for (let i = 0, rule = rules[i]; i < rules.length; i++) {
       (function (rule) {
         let strategyAry = rule.strategy.split(':')
         let errorMsg = rule.errorMsg
@@ -36,7 +36,7 @@ export class Validator {
     }
   }
   start () {
-    for(let i = 0, validatorFunc; validatorFunc = this.cache[i++];){
+    for (let i = 0, validatorFunc = this.cache[i]; i < this.cache.length; i++) {
       let msg = validatorFunc()
       if (msg) {
         return msg

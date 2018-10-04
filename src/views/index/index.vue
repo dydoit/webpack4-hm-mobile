@@ -21,8 +21,10 @@
         <panel-title :title="titles[3].name" :is-has-class="true"></panel-title>
         <product :product-list = "productList"></product>
       </div>
+      <!-- 优秀经销商 -->
       <div class="bg-black mt10">
         <panel-title :title="titles[4].name" :is-has-class="true"></panel-title>
+        <dealer-list :dealer-list = "dealerShopList"></dealer-list>
       </div>
       
     </div>
@@ -39,6 +41,7 @@ import FinancialList from './components/financialList.vue'
 import BannerOther from './components/bannerOther.vue'
 import ActivityList from './components/activityList.vue'
 import Product from './components/product.vue'
+import DealerList from './components/dealerList.vue'
 import * as api from '@/api'
 import { mapGetters, mapActions } from 'vuex'
 export default {
@@ -58,7 +61,8 @@ export default {
       financialList: [],
       bannerOthers: [],
       actList: [],
-      productList: []
+      productList: [],
+      dealerShopList: []
     }
   },
   computed: {
@@ -73,7 +77,8 @@ export default {
     FinancialList,
     BannerOther,
     ActivityList,
-    Product
+    Product,
+    DealerList
   },
   methods: {
     ...mapActions(['getLocation']),
@@ -118,7 +123,6 @@ export default {
         if (res.success) {
           let { data } = res
           this.productList = data.productList
-          console.log(this.productList)
         }
       })
     },
@@ -129,7 +133,10 @@ export default {
         pageSize: 2,
         city: _this.city.id
       }).then(res => {
-        console.log(res)
+        if (res.success) {
+          this.dealerShopList = res.data.dealerShopList
+          console.log(this.dealerShopList)
+        }
       })
     }
   },
@@ -142,20 +149,20 @@ export default {
         this.prevBannerList = this.bannerList = data.bannerList
       }
     })
-    this.getRecommendedCarList()
     this.getFinanialList()
+    this.getProduct()
+    this.getRecommendedCarList()
     this.getBanner('INDEX_MIDDLE').then(res => {
       if (res.code === 'success') {
         let {data} = res
         this.bannerOthers = data.bannerList
       }
     })
-    this.getProduct()
-    this.getGoodDealers()
   },
   watch: {
     city (newVal) {
       this.getActivityList(1, 4, newVal.id)
+      this.getGoodDealers()
     }
   },
   activated () {
