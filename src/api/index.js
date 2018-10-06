@@ -68,3 +68,24 @@ export const getGoodDealers = (payload = {}) => {
     }
   })
 }
+// 获取登录图形验证码
+export const getCodeImg = (payload = {}) => {
+  return postData('/api/sys/verification/generate', {
+    ...params(),
+    data: payload
+  })
+}
+// 发送手机验证码
+export const sendAuthCode = (payload = {}) => {
+  return postData('/api/user/randomCode/send', {
+    ...params(),
+    data: payload
+  })
+}
+// 检验手机验证码
+export const checkAuthCode = (payload = {}) => {
+  return postData('/api/user/randomCode/send', {
+    ...params(),
+    data: payload
+  })
+}
