@@ -1,5 +1,5 @@
 <template>
-  <div class="login" ref="login">
+  <div class="register">
     <Title :title="title"></Title>
     <div class="logo-wrapper">
       <img src= "../../common/images/haima-logo.png" alt="">
@@ -9,30 +9,29 @@
         <div class="username-wrapper border-bottom">
           <input type="tel" name="telephone" placeholder="请输入手机号码" @focus="errorMsg=''" v-model="telephoneNum">
         </div>
-        <div class="password-wrapper" v-if="isShowPassword">
-          <input type="password" v-model="password" name="password" key="password" placeholder="请输入密码">
-        </div>
-        <div class="password-wrapper" v-else>
+        <div class="password-wrapper">
           <input type="number" v-model="authCode" name="auth-code" key="authCode" placeholder="请输入验证码">
           <button class="btn" @click="showCodeModel">{{btnText}}</button>
         </div>
       </div>
-      <div class="tip-wrapper">
-        <div class="tip">
-          <a href="javascript:;">忘记密码?</a>
-          <a href="javascript:;" @click="toggle" v-text="switcherText"></a>
-        </div>
-        <p class="error">{{errorMsg}}</p>
+      <div class="input-wrapper">
+         <input type="password" v-model="password" name="password" key="password" placeholder="请设置登录密码">
+      </div>
+      <div class="input-wrapper">
+         <input type="password" v-model="password" name="password" key="password" placeholder="请再次输入密码">
+      </div>
+      <div class="tip">
+        <input type="checkbox" id="readed">
+        <label class="iconfont" for="readed"></label> 
+        我已阅读并同意<span>《海马商城服务协议》</span>和<span>《隐私条款》</span>
       </div>
       <div class="btn-wrapper">
-        <a href="javascript:;" class="active" @click="login">立即登录</a>
-        <a href="javascript:;">注册账号</a>
-      </div>
-      <div class="wechat-login">
-        <i class="icon iconfont icon-weixin"></i>微信登录
+        <a href="javascript:;" class="active">提交注册</a>
+        <a href="javascript:;" >已有账号，立即登录</a>
+        
       </div>
     </div>
-    <code-model 
+     <code-model 
     @showKeyboard="showKeyboard" 
     @hideKeyboard="hideKeyboard" 
     @hideCodeModel="hideCodeModel"
@@ -42,7 +41,6 @@
     <msg ref="msg"></msg>
   </div>
 </template>
-
 <script>
 import Title from '@/components/layout/title.vue'
 import CodeModel from '@/components/codeModel/codeModel.vue'
@@ -52,29 +50,24 @@ import * as api from '@/api'
 export default {
   data () {
     return {
-      title: '手机验证码登录',
+      title: '注册',
       started: false,
-      authCode: '',
       password: '',
+      authCode: '',
       btnText: '获取验证码',
       telephoneNum: '',
-      isShowPassword: true,
       isShowKeyboard: false,
       isShowCodeModel: false,
       errorMsg: ''
     }
   },
-  computed: {
-    switcherText () {
-      return this.isShowPassword ? '切换手机验证码登录' : '切换手机密码登录'
-    }
+  components: {
+    Title,
+    CodeModel,
+    Keyboard,
+    Msg
   },
   methods: {
-    toggle () {
-      this.isShowPassword = !this.isShowPassword
-      this.password = ''
-      this.authCode = ''
-    },
     showKeyboard () {
       this.isShowKeyboard = true
     },
@@ -136,33 +129,22 @@ export default {
         randomCode: authCode,
         opr
       })
-    },
-    login () {
-      let loginFromAuthCode = !this.isShowPassword
-      if (loginFromAuthCode) {
-        this.checkAuthCode('login').then(res => {
-          if (res.success) {
-            this.$refs.msg.show('登录成功')
-          }
-        })
-      }
     }
-  },
-  components: {
-    Title,
-    CodeModel,
-    Keyboard,
-    Msg
   }
 }
 </script>
-
-<style lang="stylus">
-  .logo-wrapper
-    padding 30px 0 60px
-    text-align center
-    img 
-      height 72px
+<style lang="stylus" scoped>
+  .register
+    height 100vh
+    .logo-wrapper
+      padding 30px 0 60px
+      text-align center
+      img 
+        height 72px
+  input 
+    background transparent
+    outline 0
+    font-size 14px
   .form-group
     margin 0 11px
   .form-wrapper
@@ -174,10 +156,6 @@ export default {
       display flex
       align-items center
       height 47.5px
-    input 
-      background transparent
-      outline 0
-      font-size 14px
     .password-wrapper
       justify-content space-between
       .btn
@@ -188,26 +166,38 @@ export default {
         background-color #ff8c00
         font-size 14px
         color #fff
-  .tip-wrapper
+  .input-wrapper
+    display flex
+    align-items center
+    padding: 0 10px
+    margin-top 20px
+    height 47px
+    border-radius 4px
+    background-color #f5f5f5
+  .tip
+    position relative
     padding 0 10px
-    line-height 1
-    .tip
-      display flex
-      justify-content space-between
-      margin-top 15px
-      a
-        font-size 14px
-        color #999
-    .error
-      margin 10px 0
-      font-size 14px
-      color #FF4B1F
+    margin-top 15px
+    font-size 11px
+    >input 
+      position absolute
+      clip rect(0 0 0 0)
+      &+label 
+        vertical-align -1px
+      &+label:before
+        content '\e67f'
+      &:checked+label:before
+        content '\e68d'
+        color #ff8c00
+    >span 
+      color #ff8c00
   .btn-wrapper
+    margin-top 30px
     a
       display block
       line-height 47px
       margin-top 10px
-      margin-bottom 36px
+      margin-bottom 24px
       text-align center
       font-size 15px
       color #333
@@ -215,12 +205,7 @@ export default {
         border-radius 4px
         background-color #ff8c00
         color #fff
-  .wechat-login
-    text-align center
-    font-size 12px
-    color #999
-    i 
-      vertical-align middle
-      margin-right 10px
+
 </style>
+
 

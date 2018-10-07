@@ -46,6 +46,11 @@ export default new VueRouter({
       component: () => import('../views/login/login.vue')
     },
     {
+      path: '/register',
+      name: 'Register',
+      component: () => import('../views/register/register.vue')
+    },
+    {
       path: 'customMade',
       name: 'CustomMade',
       component: () => import('../views/customMade/customMade.vue')
