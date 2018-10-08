@@ -23,7 +23,7 @@ export default {
       this.isShowMsg = true
       setTimeout(() => {
         this.isShowMsg = false
-      }, 1500)
+      }, 1000)
     }
   }
 }

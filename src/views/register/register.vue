@@ -27,7 +27,7 @@
       </div>
       <div class="btn-wrapper">
         <a href="javascript:;" class="active">提交注册</a>
-        <a href="javascript:;" >已有账号，立即登录</a>
+        <router-link to="/login">已有账号，立即登录</router-link>
         
       </div>
     </div>

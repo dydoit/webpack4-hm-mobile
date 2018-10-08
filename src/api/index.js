@@ -89,3 +89,10 @@ export const checkAuthCode = (payload = {}) => {
     data: payload
   })
 }
+// 用户登录
+export const login = (payload = {}) => {
+  return postData('/api/user/account/login', {
+    ...params(),
+    data: payload
+  })
+}

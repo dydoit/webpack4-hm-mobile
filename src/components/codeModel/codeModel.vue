@@ -81,7 +81,7 @@ export default {
     checkCode () {
       let inputCode = this.codeTexts.join('')
       if (inputCode.toLowerCase() === this.code.toLowerCase()) {
-        this.hideCodeModel()
+        this.$emit('valid')
         this.$emit('countdown')
       } else {
         this.inputWrong = true

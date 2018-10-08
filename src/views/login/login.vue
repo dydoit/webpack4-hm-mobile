@@ -10,7 +10,7 @@
           <input type="tel" name="telephone" placeholder="请输入手机号码" @focus="errorMsg=''" v-model="telephoneNum">
         </div>
         <div class="password-wrapper" v-if="isShowPassword">
-          <input type="password" v-model="password" name="password" key="password" placeholder="请输入密码">
+          <input type="password" v-model.trim="password" @focus="errorMsg=''" name="password" key="password" placeholder="请输入密码">
         </div>
         <div class="password-wrapper" v-else>
           <input type="number" v-model="authCode" name="auth-code" key="authCode" placeholder="请输入验证码">
@@ -26,7 +26,7 @@
       </div>
       <div class="btn-wrapper">
         <a href="javascript:;" class="active" @click="login">立即登录</a>
-        <a href="javascript:;">注册账号</a>
+        <router-link to="/register">注册账号</router-link>
       </div>
       <div class="wechat-login">
         <i class="icon iconfont icon-weixin"></i>微信登录
@@ -36,6 +36,7 @@
     @showKeyboard="showKeyboard" 
     @hideKeyboard="hideKeyboard" 
     @hideCodeModel="hideCodeModel"
+    @valid="valid"
     @countdown="countdown"
     :is-show-code-model="isShowCodeModel"></code-model>
     <keyboard :isShow="isShowKeyboard"></keyboard>
@@ -47,20 +48,17 @@
 import Title from '@/components/layout/title.vue'
 import CodeModel from '@/components/codeModel/codeModel.vue'
 import Keyboard from '@/components/keyboard/keyboard'
-import Msg from '@/components/msg/msg.vue'
+import md5 from 'js-md5'
 import * as api from '@/api'
+import {codeModelMixin} from '@/common/js/mixin'
 export default {
+  mixins: [codeModelMixin],
   data () {
     return {
       title: '手机验证码登录',
-      started: false,
       authCode: '',
       password: '',
-      btnText: '获取验证码',
-      telephoneNum: '',
       isShowPassword: true,
-      isShowKeyboard: false,
-      isShowCodeModel: false,
       errorMsg: ''
     }
   },
@@ -75,47 +73,12 @@ export default {
       this.password = ''
       this.authCode = ''
     },
-    showKeyboard () {
-      this.isShowKeyboard = true
-    },
-    hideKeyboard () {
-      this.isShowKeyboard = false
-    },
-    showCodeModel () {
-      let tel = this.telephoneNum
-      if (this.started) {
-        return
-      }
-      if (this.validatorMobile(tel)) {
-        this.isShowCodeModel = true
-      }
-    },
-    hideCodeModel () {
-      this.isShowCodeModel = false
-    },
     sendAuthCode () {
       let telephoneNum = this.telephoneNum
       return api.sendAuthCode({
         mobileNo: telephoneNum,
         opr: 'login'
       })
-    },
-    countdown () {
-      this.started = true
-      let total = 60
-      this.btnText = `${total}秒后重新获取`
-      // 调用发送手机验证码
-      this.sendAuthCode()
-      let timer = setInterval(() => {
-        total--
-        if (total <= 0) {
-          clearInterval(timer)
-          this.btnText = '获取验证码'
-          this.started = false
-          return
-        }
-        this.btnText = `${total}秒后重新获取`
-      }, 1000)
     },
     validatorMobile (val) {
       if (val.length < 1) {
@@ -139,10 +102,32 @@ export default {
     },
     login () {
       let loginFromAuthCode = !this.isShowPassword
+      let telephoneNum = this.telephoneNum
+      let password = this.password
+      if (!this.validatorMobile(telephoneNum)) {
+        return false
+      }
       if (loginFromAuthCode) {
         this.checkAuthCode('login').then(res => {
           if (res.success) {
             this.$refs.msg.show('登录成功')
+          }
+        })
+      } else { // 密码登录
+        if (!password) {
+          this.errorMsg = '请输入密码'
+          return false
+        }
+        password = md5(password)
+        api.login({
+          mobilePhoneNo: telephoneNum,
+          password: password
+        }).then(res => {
+          if (!res.success) {
+            this.$refs.msg.show(`${res.message}`)
+            return false
+          } else {
+            this.$refs.msg.show(`${res.message}`)
           }
         })
       }
@@ -151,8 +136,7 @@ export default {
   components: {
     Title,
     CodeModel,
-    Keyboard,
-    Msg
+    Keyboard
   }
 }
 </script>
