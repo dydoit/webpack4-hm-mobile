@@ -1,9 +1,11 @@
+import * as api from '@/api'
 import Msg from '@/components/msg/msg.vue'
 export const codeModelMixin = {
   data () {
     return {
       btnText: '获取验证码',
       telephoneNum: '',
+      authCode: '',
       started: false,
       isShowKeyboard: false,
       isShowCodeModel: false
@@ -32,10 +34,20 @@ export const codeModelMixin = {
       this.$refs.msg.show('验证通过')
       setTimeout(() => {
         this.hideCodeModel()
-      }, 500)
+      }, 1000)
     },
     hideCodeModel () {
       this.isShowCodeModel = false
+    },
+    checkAuthCode (opr, md5 = '') {
+      let telephoneNum = this.telephoneNum
+      let authCode = this.authCode
+      return api.checkAuthCode({
+        mobileNo: telephoneNum,
+        randomCode: authCode,
+        password: md5,
+        opr
+      })
     },
     countdown () {
       this.started = true

@@ -110,7 +110,6 @@ export default {
         cityId
       }).then(res => {
         if (res.code === 'success') {
-          this.$refs.scroll.refresh()
           let {data} = res
           this.actList = data.actList
         }

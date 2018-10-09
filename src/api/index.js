@@ -84,7 +84,7 @@ export const sendAuthCode = (payload = {}) => {
 }
 // 检验手机验证码
 export const checkAuthCode = (payload = {}) => {
-  return postData('/api/user/randomCode/send', {
+  return postData('/api/user/randomCode/check', {
     ...params(),
     data: payload
   })

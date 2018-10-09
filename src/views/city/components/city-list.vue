@@ -38,10 +38,6 @@ export default {
     Scroll,
     Loading
   },
-  activated () {
-    console.log('重新刷新')
-    this.$refs.cityList.refresh()
-  },
   computed: {
     ...mapState(['city']),
     cityList () {
@@ -113,7 +109,6 @@ export default {
         height += elem.clientHeight
         this.listHeights.push(height)
       })
-      console.log(this.listHeights)
     }
   }
 }

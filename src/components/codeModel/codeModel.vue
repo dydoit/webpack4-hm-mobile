@@ -81,6 +81,7 @@ export default {
     checkCode () {
       let inputCode = this.codeTexts.join('')
       if (inputCode.toLowerCase() === this.code.toLowerCase()) {
+        console.log('进来美')
         this.$emit('valid')
         this.$emit('countdown')
       } else {

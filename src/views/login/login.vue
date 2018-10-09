@@ -19,7 +19,7 @@
       </div>
       <div class="tip-wrapper">
         <div class="tip">
-          <a href="javascript:;">忘记密码?</a>
+          <router-link to="/findPass">忘记密码?</router-link>
           <a href="javascript:;" @click="toggle" v-text="switcherText"></a>
         </div>
         <p class="error">{{errorMsg}}</p>
@@ -55,8 +55,6 @@ export default {
   mixins: [codeModelMixin],
   data () {
     return {
-      title: '手机验证码登录',
-      authCode: '',
       password: '',
       isShowPassword: true,
       errorMsg: ''
@@ -65,6 +63,9 @@ export default {
   computed: {
     switcherText () {
       return this.isShowPassword ? '切换手机验证码登录' : '切换手机密码登录'
+    },
+    title () {
+      return this.isShowPassword ? '手机密码登录' : '手机验证码登录'
     }
   },
   methods: {
@@ -90,15 +91,6 @@ export default {
         return false
       }
       return true
-    },
-    checkAuthCode (opr) {
-      let telephoneNum = this.telephoneNum
-      let authCode = this.authCode
-      return api.checkAuthCode({
-        mobileNo: telephoneNum,
-        randomCode: authCode,
-        opr
-      })
     },
     login () {
       let loginFromAuthCode = !this.isShowPassword

@@ -51,6 +51,11 @@ export default new VueRouter({
       component: () => import('../views/register/register.vue')
     },
     {
+      path: '/findPass',
+      name: 'findPass',
+      component: () => import('../views/register/register.vue')
+    },
+    {
       path: 'customMade',
       name: 'CustomMade',
       component: () => import('../views/customMade/customMade.vue')
