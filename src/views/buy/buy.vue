@@ -1,6 +1,7 @@
 <template>
   <div id="buy">
     买车页面
+    <confirm></confirm>
     <Keyboard></Keyboard>
   </div>
 </template>

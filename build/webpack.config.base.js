@@ -20,7 +20,8 @@ const config = {
       '@': resolve('src'),
       'common': resolve('src/common'),
       'styles':resolve('src/styles'),
-      'views':resolve('src/views')
+      'views':resolve('src/views'),
+      'components':resolve('src/components')
     }
   },
   module:{

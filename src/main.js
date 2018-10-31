@@ -9,10 +9,11 @@ import VueLazyload from 'vue-lazyload'
 import store from './store'
 import 'common/styles/global.styl'
 import 'swiper/dist/css/swiper.css'
+import confirm from 'components/confirm'
 /* eslint-disable no-unused-vars */
 import VConsole from 'vconsole/dist/vconsole.min.js'
 let vConsole = new VConsole()
-
+Vue.use(confirm)
 Vue.use(VueLazyload)
 Vue.use(VueAwasomeSwiper)
 FastClick.attach(document.body)
